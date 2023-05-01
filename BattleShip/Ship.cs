@@ -5,23 +5,23 @@ public class Ship
     private TypeShip _typeShip;
     private OrientationShip _orientationShip;
     private int _lifeShip;
-    private int _xcoordinate;
-    private int _ycoordinate;
+    private int _xСoordinate;
+    private int _yCoordinate;
 
     public Ship(TypeShip typeShip, OrientationShip orientationShip)
     {
         this._typeShip = typeShip;
         this._orientationShip = orientationShip;
         this._lifeShip = (int)typeShip;                                       //Конструктор
-        _xcoordinate = 4;
-        _ycoordinate = 4;
+        _xСoordinate = 4;
+        _yCoordinate = 4;
     }
 
     public void setUpShip(OrientationShip orientationShip, int x, int y)    //Установка координат и ориентации корабля
     {
         this._orientationShip = orientationShip;                            //изменения данных корабля
-        this._xcoordinate = x;
-        this._ycoordinate = y;
+        this._xСoordinate = x;
+        this._yCoordinate = y;
     }
 
     public void AddShip(ref char[,] battlefield)                       //Добавление корабля на поле боя
@@ -30,14 +30,14 @@ public class Ship
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                battlefield[_xcoordinate, _ycoordinate + i] = 'Z';
+                battlefield[_xСoordinate, _yCoordinate + i] = 'Z';
             }
         }
         else
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                battlefield[_xcoordinate + i, _ycoordinate] = 'Z';
+                battlefield[_xСoordinate + i, _yCoordinate] = 'Z';
             }
         }
     }
@@ -48,14 +48,14 @@ public class Ship
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                battlefield[_xcoordinate, _ycoordinate + i] = '∙';
+                battlefield[_xСoordinate, _yCoordinate + i] = '∙';
             }
         }
         else
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                battlefield[_xcoordinate + i, _ycoordinate] = '∙';
+                battlefield[_xСoordinate + i, _yCoordinate] = '∙';
             }
         }
     }
@@ -66,32 +66,32 @@ public class Ship
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                battlefield[_xcoordinate, _ycoordinate + i] = '#';
+                battlefield[_xСoordinate, _yCoordinate + i] = '#';
 
-                if (_ycoordinate > 0 && i == 0) battlefield[_xcoordinate, _ycoordinate + i - 1] = '?';
-                if (_ycoordinate + i < 9) battlefield[_xcoordinate, _ycoordinate + i + 1] = '?';
-                if (_xcoordinate > 0) battlefield[_xcoordinate - 1, _ycoordinate + i] = '?';
-                if (_xcoordinate < 9) battlefield[_xcoordinate + 1, _ycoordinate + i] = '?';
-                if (_xcoordinate > 0 && _ycoordinate > 0) battlefield[_xcoordinate - 1, _ycoordinate + i - 1] = '?';
-                if (_xcoordinate < 9 && _ycoordinate + i < 9) battlefield[_xcoordinate + 1, _ycoordinate + i + 1] = '?';
-                if (_xcoordinate < 9 && _ycoordinate > 0) battlefield[_xcoordinate + 1, _ycoordinate + i - 1] = '?';
-                if (_xcoordinate > 0 && _ycoordinate + i < 9) battlefield[_xcoordinate - 1, _ycoordinate + i + 1] = '?';
+                if (_yCoordinate > 0 && i == 0) battlefield[_xСoordinate, _yCoordinate + i - 1] = '?';
+                if (_yCoordinate + i < 9) battlefield[_xСoordinate, _yCoordinate + i + 1] = '?';
+                if (_xСoordinate > 0) battlefield[_xСoordinate - 1, _yCoordinate + i] = '?';
+                if (_xСoordinate < 9) battlefield[_xСoordinate + 1, _yCoordinate + i] = '?';
+                if (_xСoordinate > 0 && _yCoordinate > 0) battlefield[_xСoordinate - 1, _yCoordinate + i - 1] = '?';
+                if (_xСoordinate < 9 && _yCoordinate + i < 9) battlefield[_xСoordinate + 1, _yCoordinate + i + 1] = '?';
+                if (_xСoordinate < 9 && _yCoordinate > 0) battlefield[_xСoordinate + 1, _yCoordinate + i - 1] = '?';
+                if (_xСoordinate > 0 && _yCoordinate + i < 9) battlefield[_xСoordinate - 1, _yCoordinate + i + 1] = '?';
             }
         }
         else
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                battlefield[_xcoordinate + i, _ycoordinate] = '#';
+                battlefield[_xСoordinate + i, _yCoordinate] = '#';
 
-                if (_ycoordinate > 0) battlefield[_xcoordinate + i, _ycoordinate - 1] = '?';
-                if (_ycoordinate < 9) battlefield[_xcoordinate + i, _ycoordinate + 1] = '?';
-                if (_xcoordinate > 0 && i == 0) battlefield[_xcoordinate + i - 1, _ycoordinate] = '?';
-                if (_xcoordinate + i < 9) battlefield[_xcoordinate + i + 1, _ycoordinate] = '?';
-                if (_xcoordinate > 0 && _ycoordinate > 0) battlefield[_xcoordinate + i - 1, _ycoordinate - 1] = '?';
-                if (_xcoordinate + i < 9 && _ycoordinate < 9) battlefield[_xcoordinate + i + 1, _ycoordinate + 1] = '?';
-                if (_xcoordinate + i < 9 && _ycoordinate > 0) battlefield[_xcoordinate + i + 1, _ycoordinate - 1] = '?';
-                if (_xcoordinate > 0 && _ycoordinate < 9) battlefield[_xcoordinate + i - 1, _ycoordinate + 1] = '?';
+                if (_yCoordinate > 0) battlefield[_xСoordinate + i, _yCoordinate - 1] = '?';
+                if (_yCoordinate < 9) battlefield[_xСoordinate + i, _yCoordinate + 1] = '?';
+                if (_xСoordinate > 0 && i == 0) battlefield[_xСoordinate + i - 1, _yCoordinate] = '?';
+                if (_xСoordinate + i < 9) battlefield[_xСoordinate + i + 1, _yCoordinate] = '?';
+                if (_xСoordinate > 0 && _yCoordinate > 0) battlefield[_xСoordinate + i - 1, _yCoordinate - 1] = '?';
+                if (_xСoordinate + i < 9 && _yCoordinate < 9) battlefield[_xСoordinate + i + 1, _yCoordinate + 1] = '?';
+                if (_xСoordinate + i < 9 && _yCoordinate > 0) battlefield[_xСoordinate + i + 1, _yCoordinate - 1] = '?';
+                if (_xСoordinate > 0 && _yCoordinate < 9) battlefield[_xСoordinate + i - 1, _yCoordinate + 1] = '?';
             }
         }
     }
@@ -107,7 +107,7 @@ public class Ship
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                if (_xcoordinate == x && _ycoordinate + i == y)
+                if (_xСoordinate == x && _yCoordinate + i == y)
                 {
                     HitShip(ref battlefield, x, y);
                 }
@@ -117,7 +117,7 @@ public class Ship
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                if (_xcoordinate + i == x && _ycoordinate == y)
+                if (_xСoordinate + i == x && _yCoordinate == y)
                 {
                     HitShip(ref battlefield, x, y);
                 }

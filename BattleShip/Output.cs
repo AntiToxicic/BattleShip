@@ -10,15 +10,15 @@ public class Draw
         Console.WriteLine("   ##     ##       ######         ##  ##    ######      ##       ##      ##        ##   ");
         Console.WriteLine("###       #####    ##  ##         #####     ##  ##      ####     ####    ######    #####");
         Console.WriteLine("\n");
-    }    
-    
+    }
+
     public void Game_Menu(params string[] item_bar)     //Отрисвка пунктов меню   (для удобного взаимодействия)
     {
         for (int i = 0; i < item_bar.Length; i++)
         {
-            Console.Write($"\t{i+1}. [{item_bar[i]}]");
+            Console.Write($"\t{i + 1}. [{item_bar[i]}]");
         }
-        
+
         Console.Write("\n\n");
     }
 
@@ -27,14 +27,14 @@ public class Draw
         for (int i = 0; i < 10; i++)
         {
             Console.Write("\n");
-            
+
             for (int j = 0; j < 10; j++)
             {
-                Console.Write($"  {playerField[i,j]}");
-            } 
-            
+                Console.Write($"  {playerField[i, j]}");
+            }
+
             Console.Write("\t\t");
-            
+
             for (int j = 0; j < 10; j++)
             {
                 if (botField[i, j] == '+')
@@ -42,7 +42,7 @@ public class Draw
                     Console.Write("  ");
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.BackgroundColor = ConsoleColor.White;
-                    Console.Write($"{botField[i,j]}");
+                    Console.Write($"{botField[i, j]}");
                     Console.ResetColor();
                 }
                 else
@@ -51,7 +51,7 @@ public class Draw
                 }
             }
         }
-        
+
         Console.Write("\n");
     }
     public void Battlefield(char[,] playerField)     //Отрисовка полей с кораблями
@@ -59,14 +59,14 @@ public class Draw
         for (int i = 0; i < 10; i++)
         {
             Console.Write("\n");
-            
+
             for (int j = 0; j < 10; j++)
             {
-                Console.Write($"  {playerField[i,j]}");
-            } 
-            
+                Console.Write($"  {playerField[i, j]}");
+            }
+
         }
-        
+
         Console.Write("\n");
     }
 

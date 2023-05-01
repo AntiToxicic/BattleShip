@@ -6,10 +6,10 @@ namespace BattleShip;
 
 public class Generate
 {
-    public char[,] battleField = new char[10,10];
-    public char[,] tempBattleField = new char[10,10];
-    private char shipPlace = 'Z';
-    
+    public char[,] battleField = new char[10, 10];
+    public char[,] tempBattleField = new char[10, 10];
+    private char _shipPlace = 'Z';
+
     public Generate()
     {
         for (int i = 0; i < battleField.GetLength(0); i++)
@@ -22,22 +22,23 @@ public class Generate
         tempBattleField = battleField.Clone() as char[,];
     }
 
-    protected bool isFreePlace(OrientationShip orientationShip, TypeShip typeShip,int x, int y)
+    protected bool IsFreePlace(OrientationShip orientationShip, TypeShip typeShip, int x, int y)
     {
-        int i = 0;
-        
-        do{
-            if (tempBattleField[x, y] == shipPlace) return false;
-            if (x < 9) {if (tempBattleField[x + 1, y] == shipPlace) return false;}
-            if (x > 0) {if (tempBattleField[x - 1, y] == shipPlace) return false;}
-            if (y < 9) {if (tempBattleField[x, y + 1] == shipPlace) return false;}
-            if (y > 0) {if (tempBattleField[x, y - 1] == shipPlace) return false;}
-            
-            if(x < 9 && y < 9) {if (tempBattleField[x + 1, y + 1] == shipPlace) return false;}
-            if(x > 0 && y > 0) {if (tempBattleField[x - 1, y - 1] == shipPlace) return false;}
-            if(x < 9 && y > 0) {if (tempBattleField[x + 1, y - 1] == shipPlace) return false;}
-            if(x > 0 && y < 9) {if (tempBattleField[x - 1, y + 1] == shipPlace) return false;}
-            
+        var i = 0;
+
+        do
+        {
+            if (tempBattleField[x, y] == _shipPlace) return false;
+            if (x < 9) { if (tempBattleField[x + 1, y] == _shipPlace) return false; }
+            if (x > 0) { if (tempBattleField[x - 1, y] == _shipPlace) return false; }
+            if (y < 9) { if (tempBattleField[x, y + 1] == _shipPlace) return false; }
+            if (y > 0) { if (tempBattleField[x, y - 1] == _shipPlace) return false; }
+
+            if (x < 9 && y < 9) { if (tempBattleField[x + 1, y + 1] == _shipPlace) return false; }
+            if (x > 0 && y > 0) { if (tempBattleField[x - 1, y - 1] == _shipPlace) return false; }
+            if (x < 9 && y > 0) { if (tempBattleField[x + 1, y - 1] == _shipPlace) return false; }
+            if (x > 0 && y < 9) { if (tempBattleField[x - 1, y + 1] == _shipPlace) return false; }
+
             if (orientationShip == OrientationShip.Horizontal)
             {
                 y++;
@@ -47,8 +48,8 @@ public class Generate
                 x++;
             }
 
-        } while (++i !=(int)typeShip);
-        
+        } while (++i != (int)typeShip);
+
         tempBattleField = battleField.Clone() as char[,];
         return true;
     }
@@ -60,10 +61,10 @@ public class PlayerGen : Generate
     private Draw _draw = new Draw();
     public Fleet player = new Fleet();
 
-    
+
     public void setShips()
     {
-        int count = 0;
+        var count = 0;
         int x, y;
         OrientationShip orientationShip;
         TypeShip typeShip = TypeShip.Single;
@@ -73,13 +74,13 @@ public class PlayerGen : Generate
 
         while (++count <= 10)
         {
-            
+
             x = 4;
             y = 4;
-            bool apply = false;
+            bool IsShipSet = false;
             orientationShip = OrientationShip.Horizontal;
 
-            while (apply == false)
+            while (IsShipSet == false)
             {
                 switch (count)
                 {
@@ -163,7 +164,7 @@ public class PlayerGen : Generate
 
                         break;
                     case ConsoleKey.Enter:
-                        apply = isFreePlace(orientationShip, typeShip, x, y);
+                        IsShipSet = IsFreePlace(orientationShip, typeShip, x, y);
                         break;
                 }
 
@@ -282,46 +283,46 @@ public class PlayerGen : Generate
     public void setShipsRdm()
     {
         Random random = new Random();
-        int count = 0;
+        var count = 0;
         int x = random.Next(10);
         int y = random.Next(10);
 
         OrientationShip orientationShip = OrientationShip.Horizontal;
         TypeShip typeShip = TypeShip.Single;
-        bool isOverFlow = true;
+        bool IsOverFlow = true;
 
         while (++count <= 10)
         {
             tempBattleField = battleField.Clone() as char[,];
-            bool apply = false;
+
             do
             {
-                isOverFlow = true;
-                
-                while (isOverFlow)
+                IsOverFlow = true;
+
+                while (IsOverFlow)
                 {
                     orientationShip = (OrientationShip)random.Next(2);
                     x = random.Next(10);
                     y = random.Next(10);
-                    
+
                     if (orientationShip == OrientationShip.Horizontal)
                     {
                         if (y - 1 + (int)typeShip < battleField.GetLength(0))
                         {
-                            isOverFlow = false;
+                            IsOverFlow = false;
                         }
                     }
                     else
                     {
                         if (x - 1 + (int)typeShip < battleField.GetLength(0))
                         {
-                            isOverFlow = false;
+                            IsOverFlow = false;
                         }
                     }
                 }
-                
-                
-            } while (isFreePlace(orientationShip, typeShip, x, y) == false);
+
+
+            } while (IsFreePlace(orientationShip, typeShip, x, y) == false);
 
 
 
@@ -390,50 +391,50 @@ public class PlayerGen : Generate
 public class BotGen : Generate
 {
     public Fleet bot = new Fleet();
-    
+
     public void setShipsRdm()
     {
         Random random = new Random();
-        int count = 0;
+        var count = 0;
         int x = random.Next(10);
         int y = random.Next(10);
 
         OrientationShip orientationShip = OrientationShip.Horizontal;
         TypeShip typeShip = TypeShip.Single;
-        bool isOverFlow = true;
+        bool IsOverFlow = true;
 
         while (++count <= 10)
         {
             tempBattleField = battleField.Clone() as char[,];
-            bool apply = false;
+            bool IsShipSet = false;
             do
             {
-                isOverFlow = true;
-                
-                while (isOverFlow)
+                IsOverFlow = true;
+
+                while (IsOverFlow)
                 {
                     orientationShip = (OrientationShip)random.Next(2);
                     x = random.Next(10);
                     y = random.Next(10);
-                    
+
                     if (orientationShip == OrientationShip.Horizontal)
                     {
                         if (y - 1 + (int)typeShip < battleField.GetLength(0))
                         {
-                            isOverFlow = false;
+                            IsOverFlow = false;
                         }
                     }
                     else
                     {
                         if (x - 1 + (int)typeShip < battleField.GetLength(0))
                         {
-                            isOverFlow = false;
+                            IsOverFlow = false;
                         }
                     }
                 }
-                
-                
-            } while (isFreePlace(orientationShip, typeShip, x, y) == false);
+
+
+            } while (IsFreePlace(orientationShip, typeShip, x, y) == false);
 
 
 
@@ -491,5 +492,5 @@ public class BotGen : Generate
             }
         }
     }
-    
+
 }

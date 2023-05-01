@@ -9,8 +9,8 @@ Console.WriteLine("Do you wanna random set ship, or handle?\tr - Random, h - han
 while (true)
 {
     char key = Console.ReadKey().KeyChar;
-    if(key == 'r') {theBattle.PlayerGen.setShipsRdm(); break;}
-    if(key == 'h') {theBattle.PlayerGen.setShips(); break;}
+    if (key == 'r') { theBattle.PlayerGen.setShipsRdm(); break; }
+    if (key == 'h') { theBattle.PlayerGen.setShips(); break; }
 }
 
 

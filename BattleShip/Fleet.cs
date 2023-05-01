@@ -36,19 +36,19 @@ public class Fleet
     public int fleetShips()
     {
         _ships = 0;
-        
+
         if (singleShip1.lifes() > 0) _ships++;
         if (singleShip2.lifes() > 0) _ships++;
         if (singleShip3.lifes() > 0) _ships++;
         if (singleShip4.lifes() > 0) _ships++;
-        
+
         if (doubleShip1.lifes() > 0) _ships++;
         if (doubleShip2.lifes() > 0) _ships++;
         if (doubleShip3.lifes() > 0) _ships++;
-        
+
         if (tripleShip1.lifes() > 0) _ships++;
         if (tripleShip2.lifes() > 0) _ships++;
-        
+
         if (quadroShip.lifes() > 0) _ships++;
 
         return _ships;
