@@ -478,5 +478,5 @@ $RECYCLE.BIN/
 
 # ignore for Faketogosamogo
 .idea/
-bin/
-obj/
+BattleShip/bin/
+BattleShip/obj
