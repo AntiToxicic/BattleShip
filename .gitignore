@@ -475,3 +475,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# ignore for Faketogosamogo
+.idea/
+bin/
+obj/
