@@ -1,14 +1,14 @@
 namespace BattleShip;
 
-public class Draw
+public class OutPut
 {
     public void Game_Name()                             //Отрисовка названия игры "SEA BATTLE"
     {
-        Console.WriteLine(" ####     #####      ###          ####        ###       ##       ##      ##        #####");
-        Console.WriteLine("##        ##       ##  ##         ##  ##    ##  ##      ##       ##      ##        ##   ");
-        Console.WriteLine("  ##      #####    ##  ##         ####      ##  ##    ######   ######    ##        #####");
-        Console.WriteLine("   ##     ##       ######         ##  ##    ######      ##       ##      ##        ##   ");
-        Console.WriteLine("###       #####    ##  ##         #####     ##  ##      ####     ####    ######    #####");
+        Console.WriteLine(" ####    ###     #      #    #      #####   ####  #   #  #  ####   ");
+        Console.WriteLine(" #   #  #   #    #      #    #      #      #      #   #  #  #   #  ");
+        Console.WriteLine(" ####   #   #  #####  #####  #      #####   ###   #####  #  ####   ");
+        Console.WriteLine(" #   #  #####    #      #    #      #          #  #   #  #  #      ");
+        Console.WriteLine(" ####   #   #    ###    ###  #####  #####  ####   #   #  #  #      version 3.0");
         Console.WriteLine("\n");
     }
 

@@ -3,7 +3,7 @@ namespace BattleShip;
 public class Fleet
 {
     private int _ships;
-    private int _lifes;
+    LayOut _layOut = new 
 
     public Ship singleShip1 = new Ship(TypeShip.Single, OrientationShip.Horizontal);
     public Ship singleShip2 = new Ship(TypeShip.Single, OrientationShip.Horizontal);
@@ -16,24 +16,17 @@ public class Fleet
 
     public Ship tripleShip1 = new Ship(TypeShip.Triple, OrientationShip.Horizontal);
     public Ship tripleShip2 = new Ship(TypeShip.Triple, OrientationShip.Horizontal);
-
+ 
     public Ship quadroShip = new Ship(TypeShip.Quadro, OrientationShip.Horizontal);
-    public Fleet(int ships = 10, int lifes = 20)
+    public Fleet()
     {
-        this._ships = ships;
-        this._lifes = lifes;
+        for (int i = 1; i <= 10; i++)
+        {
+            
+        }
     }
 
-    public int fleetLifes()
-    {
-        _lifes = singleShip1.lifes() + singleShip2.lifes() + singleShip3.lifes() + singleShip4.lifes() +
-                doubleShip1.lifes() + doubleShip2.lifes() + doubleShip3.lifes() +
-                tripleShip1.lifes() + tripleShip2.lifes() +
-                quadroShip.lifes();
-        return _lifes;
-    }
-
-    public int fleetShips()
+    public int GetFleetShips()
     {
         _ships = 0;
 

@@ -12,19 +12,18 @@ public class Ship
     {
         this._typeShip = typeShip;
         this._orientationShip = orientationShip;
-        this._lifeShip = (int)typeShip;                                       //Конструктор
-        _xСoordinate = 4;
+        this._lifeShip = (int)typeShip;                                      
         _yCoordinate = 4;
     }
 
-    public void setUpShip(OrientationShip orientationShip, int x, int y)    //Установка координат и ориентации корабля
+    public void setUpShip(OrientationShip orientationShip, int x, int y)   
     {
-        this._orientationShip = orientationShip;                            //изменения данных корабля
+        this._orientationShip = orientationShip;                            
         this._xСoordinate = x;
         this._yCoordinate = y;
     }
 
-    public void AddShip(ref char[,] battlefield)                       //Добавление корабля на поле боя
+    public void AddShip(ref char[,] battlefield)                       
     {
         if (_orientationShip == OrientationShip.Horizontal)
         {
@@ -42,7 +41,7 @@ public class Ship
         }
     }
 
-    public void DeleteShip(ref char[,] battlefield)                       //удаление корабля на поле боя
+    public void DeleteShip(ref char[,] battlefield)                     
     {
         if (_orientationShip == OrientationShip.Horizontal)
         {
@@ -60,7 +59,7 @@ public class Ship
         }
     }
 
-    private void ExpShip(ref char[,] battlefield)                       //Взрыв корабля на поле боя
+    private void ExpShip(ref char[,] battlefield)                  
     {
         if (_orientationShip == OrientationShip.Horizontal)
         {
@@ -96,12 +95,12 @@ public class Ship
         }
     }
 
-    public bool AliveShip()                                            //Проверка жизни корабля
+    public bool AliveShip()                                           
     {
         return (_lifeShip > 0);
     }
 
-    public void CheckFieldShip(ref char[,] battlefield, int x, int y)  //Проверка какому короблю принадлежит поле
+    public void CheckFieldShip(ref char[,] battlefield, int x, int y) 
     {
         if (_orientationShip == OrientationShip.Horizontal)
         {
@@ -125,14 +124,14 @@ public class Ship
         }
     }
 
-    private void HitShip(ref char[,] battlefield, int x, int y)        //Попадание по кораблю
+    private void HitShip(ref char[,] battlefield, int x, int y)     
     {
         battlefield[x, y] = 'x';
         _lifeShip--;
         if (!AliveShip()) { ExpShip(ref battlefield); }
     }
 
-    public int lifes()                                                  //возвращает количество жизней корабля
+    public int lifes()                                               
     {
         return _lifeShip;
     }

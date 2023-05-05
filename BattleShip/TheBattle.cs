@@ -2,9 +2,9 @@ namespace BattleShip;
 
 public class TheBattle
 {
-    private Draw _draw = new Draw();
-    public PlayerGen PlayerGen = new PlayerGen();
-    public BotGen BotGen = new BotGen();
+    private OutPut output = new OutPut();
+    public PlayerLayOut playerLayOut = new PlayerLayOut();
+    public BotLayOut botLayOut = new BotLayOut();
     private bool _isGame;
 
     private char[,] hiddenField = new char[10, 10];
@@ -41,9 +41,9 @@ public class TheBattle
             while (badField == false)
             {
                 Console.Clear();
-                _draw.Battlefield(PlayerGen.battleField, hiddenField);
-                // _draw.Battlefield(BotGen.battleField);
-                _draw.rules2();
+                output.Battlefield(playerLayOut.battleField, hiddenField);
+                // output.Battlefield(botLayOut.battleField);
+                output.rules2();
 
                 pressedKey = Console.ReadKey();
                 switch (pressedKey.Key)
@@ -84,27 +84,27 @@ public class TheBattle
 
     private void checkFieldbot(int x, int y, out char explosionField)
     {
-        if (BotGen.battleField[x, y] == _shipPlace)
+        if (botLayOut.battleField[x, y] == _shipPlace)
         {
             explosionField = 'x';
 
-            BotGen.bot.singleShip1.CheckFieldShip(ref BotGen.battleField, x, y);
-            BotGen.bot.singleShip2.CheckFieldShip(ref BotGen.battleField, x, y);
-            BotGen.bot.singleShip3.CheckFieldShip(ref BotGen.battleField, x, y);
-            BotGen.bot.singleShip4.CheckFieldShip(ref BotGen.battleField, x, y);
+            botLayOut.bot.singleShip1.CheckFieldShip(ref botLayOut.battleField, x, y);
+            botLayOut.bot.singleShip2.CheckFieldShip(ref botLayOut.battleField, x, y);
+            botLayOut.bot.singleShip3.CheckFieldShip(ref botLayOut.battleField, x, y);
+            botLayOut.bot.singleShip4.CheckFieldShip(ref botLayOut.battleField, x, y);
 
-            BotGen.bot.doubleShip1.CheckFieldShip(ref BotGen.battleField, x, y);
-            BotGen.bot.doubleShip2.CheckFieldShip(ref BotGen.battleField, x, y);
-            BotGen.bot.doubleShip3.CheckFieldShip(ref BotGen.battleField, x, y);
+            botLayOut.bot.doubleShip1.CheckFieldShip(ref botLayOut.battleField, x, y);
+            botLayOut.bot.doubleShip2.CheckFieldShip(ref botLayOut.battleField, x, y);
+            botLayOut.bot.doubleShip3.CheckFieldShip(ref botLayOut.battleField, x, y);
 
-            BotGen.bot.tripleShip1.CheckFieldShip(ref BotGen.battleField, x, y);
-            BotGen.bot.tripleShip2.CheckFieldShip(ref BotGen.battleField, x, y);
+            botLayOut.bot.tripleShip1.CheckFieldShip(ref botLayOut.battleField, x, y);
+            botLayOut.bot.tripleShip2.CheckFieldShip(ref botLayOut.battleField, x, y);
 
-            BotGen.bot.quadroShip.CheckFieldShip(ref BotGen.battleField, x, y);
+            botLayOut.bot.quadroShip.CheckFieldShip(ref botLayOut.battleField, x, y);
 
             FleetAlive();
         }
-        else
+        else 
         {
             explosionField = '?';
         }
@@ -113,41 +113,41 @@ public class TheBattle
     private void checkFieldPlayer(int x, int y, out char explosionField)
     {
 
-        if (PlayerGen.battleField[x, y] == _shipPlace)
+        if (playerLayOut.battleField[x, y] == _shipPlace)
         {
             explosionField = 'x';
 
-            PlayerGen.player.singleShip1.CheckFieldShip(ref PlayerGen.battleField, x, y);
-            PlayerGen.player.singleShip2.CheckFieldShip(ref PlayerGen.battleField, x, y);
-            PlayerGen.player.singleShip3.CheckFieldShip(ref PlayerGen.battleField, x, y);
-            PlayerGen.player.singleShip4.CheckFieldShip(ref PlayerGen.battleField, x, y);
+            playerLayOut.player.singleShip1.CheckFieldShip(ref playerLayOut.battleField, x, y);
+            playerLayOut.player.singleShip2.CheckFieldShip(ref playerLayOut.battleField, x, y);
+            playerLayOut.player.singleShip3.CheckFieldShip(ref playerLayOut.battleField, x, y);
+            playerLayOut.player.singleShip4.CheckFieldShip(ref playerLayOut.battleField, x, y);
 
-            PlayerGen.player.doubleShip1.CheckFieldShip(ref PlayerGen.battleField, x, y);
-            PlayerGen.player.doubleShip2.CheckFieldShip(ref PlayerGen.battleField, x, y);
-            PlayerGen.player.doubleShip3.CheckFieldShip(ref PlayerGen.battleField, x, y);
+            playerLayOut.player.doubleShip1.CheckFieldShip(ref playerLayOut.battleField, x, y);
+            playerLayOut.player.doubleShip2.CheckFieldShip(ref playerLayOut.battleField, x, y);
+            playerLayOut.player.doubleShip3.CheckFieldShip(ref playerLayOut.battleField, x, y);
 
-            PlayerGen.player.tripleShip1.CheckFieldShip(ref PlayerGen.battleField, x, y);
-            PlayerGen.player.tripleShip2.CheckFieldShip(ref PlayerGen.battleField, x, y);
+            playerLayOut.player.tripleShip1.CheckFieldShip(ref playerLayOut.battleField, x, y);
+            playerLayOut.player.tripleShip2.CheckFieldShip(ref playerLayOut.battleField, x, y);
 
-            PlayerGen.player.quadroShip.CheckFieldShip(ref PlayerGen.battleField, x, y);
+            playerLayOut.player.quadroShip.CheckFieldShip(ref playerLayOut.battleField, x, y);
 
             FleetAlive();
         }
         else
         {
             explosionField = '?';
-            hit(x, y, explosionField, PlayerGen.battleField);
+            hit(x, y, explosionField, playerLayOut.battleField);
         }
     }
 
     private void copyField()
     {
-        for (int i = 0; i < BotGen.battleField.GetLength(0); i++)
+        for (int i = 0; i < botLayOut.battleField.GetLength(0); i++)
         {
-            for (int j = 0; j < BotGen.battleField.GetLength(1); j++)
+            for (int j = 0; j < botLayOut.battleField.GetLength(1); j++)
             {
-                if (BotGen.battleField[i, j] == '#') hiddenField[i, j] = '#';
-                if (BotGen.battleField[i, j] == '?') hiddenField[i, j] = '?';
+                if (botLayOut.battleField[i, j] == '#') hiddenField[i, j] = '#';
+                if (botLayOut.battleField[i, j] == '?') hiddenField[i, j] = '?';
             }
         }
     }
@@ -163,8 +163,8 @@ public class TheBattle
             x = random.Next(10);
             y = random.Next(10);
 
-            if (PlayerGen.battleField[x, y] == _nullPlace ||
-                PlayerGen.battleField[x, y] == _shipPlace) break;
+            if (playerLayOut.battleField[x, y] == _nullPlace ||
+                playerLayOut.battleField[x, y] == _shipPlace) break;
         }
         Thread.Sleep(400);
         checkFieldPlayer(x, y, out explosionField);
@@ -174,14 +174,14 @@ public class TheBattle
 
     private void FleetAlive()
     {
-        if (PlayerGen.player.fleetShips() == 0)
+        if (playerLayOut.player.GetFleetShips() == 0)
         {
             Console.Clear();
             Console.WriteLine("Bot is Winning!");
             _isGame = false;
         }
 
-        if (BotGen.bot.fleetShips() == 0)
+        if (botLayOut.bot.GetFleetShips() == 0)
         {
             Console.Clear();
             Console.WriteLine("Player is Winning!");

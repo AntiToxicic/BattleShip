@@ -1,16 +1,12 @@
-using System.Formats.Asn1;
-using System.Text;
-using System.Xml.Serialization;
-
 namespace BattleShip;
 
-public class Generate
+public class LayOut
 {
     public char[,] battleField = new char[10, 10];
     public char[,] tempBattleField = new char[10, 10];
     private char _shipPlace = 'Z';
 
-    public Generate()
+    public LayOut()
     {
         for (int i = 0; i < battleField.GetLength(0); i++)
         {
@@ -56,9 +52,9 @@ public class Generate
 
 }
 
-public class PlayerGen : Generate
+public class PlayerLayOut : LayOut
 {
-    private Draw _draw = new Draw();
+    private OutPut output = new OutPut();
     public Fleet player = new Fleet();
 
 
@@ -68,69 +64,17 @@ public class PlayerGen : Generate
         int x, y;
         OrientationShip orientationShip;
         TypeShip typeShip = TypeShip.Single;
+        
         ConsoleKeyInfo pressedKey;
-
-
-
-        while (++count <= 10)
-        {
-
-            x = 4;
-            y = 4;
-            bool IsShipSet = false;
-            orientationShip = OrientationShip.Horizontal;
+        bool IsShipSet = false;
 
             while (IsShipSet == false)
             {
-                switch (count)
-                {
-                    case 1:
-                        player.singleShip1.AddShip(ref battleField);
-                        typeShip = TypeShip.Single;
-                        break;
-                    case 2:
-                        player.singleShip2.AddShip(ref battleField);
-                        typeShip = TypeShip.Single;
-                        break;
-                    case 3:
-                        player.singleShip3.AddShip(ref battleField);
-                        typeShip = TypeShip.Single;
-                        break;
-                    case 4:
-                        player.singleShip4.AddShip(ref battleField);
-                        typeShip = TypeShip.Single;
-                        break;
-                    case 5:
-                        player.doubleShip1.AddShip(ref battleField);
-                        typeShip = TypeShip.Double;
-                        break;
-                    case 6:
-                        player.doubleShip2.AddShip(ref battleField);
-                        typeShip = TypeShip.Double;
-                        break;
-                    case 7:
-                        player.doubleShip3.AddShip(ref battleField);
-                        typeShip = TypeShip.Double;
-                        break;
-                    case 8:
-                        player.tripleShip1.AddShip(ref battleField);
-                        typeShip = TypeShip.Triple;
-                        break;
-                    case 9:
-                        player.tripleShip2.AddShip(ref battleField);
-                        typeShip = TypeShip.Triple;
-                        break;
-                    case 10:
-                        player.quadroShip.AddShip(ref battleField);
-                        typeShip = TypeShip.Quadro;
-                        break;
-                }
-
                 Console.Clear();
-                _draw.Game_Name();
-                _draw.Battlefield(battleField);
-                _draw.rules();
-                pressedKey = Console.ReadKey();
+                output.Game_Name();
+                output.Battlefield(battleField);
+                output.rules();
+                pressedKey = Console.ReadKey();  
 
                 switch (pressedKey.Key)
                 {
@@ -161,124 +105,13 @@ public class PlayerGen : Generate
                                 orientationShip = OrientationShip.Horizontal;
                             }
                         }
-
                         break;
                     case ConsoleKey.Enter:
                         IsShipSet = IsFreePlace(orientationShip, typeShip, x, y);
                         break;
                 }
-
-                if (count >= 10)
-                {
-                    if (count == 10)
-                    {
-                        player.quadroShip.DeleteShip(ref battleField);
-                        player.quadroShip.setUpShip(orientationShip, x, y);
-                    }
-
-                    player.quadroShip.AddShip(ref battleField);
-                }
-
-                if (count >= 9)
-                {
-                    if (count == 9)
-                    {
-                        player.tripleShip2.DeleteShip(ref battleField);
-                        player.tripleShip2.setUpShip(orientationShip, x, y);
-                    }
-
-                    player.tripleShip2.AddShip(ref battleField);
-                }
-
-                if (count >= 8)
-                {
-                    if (count == 8)
-                    {
-                        player.tripleShip1.DeleteShip(ref battleField);
-                        player.tripleShip1.setUpShip(orientationShip, x, y);
-                    }
-
-                    player.tripleShip1.AddShip(ref battleField);
-                }
-
-                if (count >= 7)
-                {
-                    if (count == 7)
-                    {
-                        player.doubleShip3.DeleteShip(ref battleField);
-                        player.doubleShip3.setUpShip(orientationShip, x, y);
-                    }
-
-                    player.doubleShip3.AddShip(ref battleField);
-                }
-
-                if (count >= 6)
-                {
-                    if (count == 6)
-                    {
-                        player.doubleShip2.DeleteShip(ref battleField);
-                        player.doubleShip2.setUpShip(orientationShip, x, y);
-                    }
-
-                    player.doubleShip2.AddShip(ref battleField);
-                }
-
-                if (count >= 5)
-                {
-                    if (count == 5)
-                    {
-                        player.doubleShip1.DeleteShip(ref battleField);
-                        player.doubleShip1.setUpShip(orientationShip, x, y);
-                    }
-
-                    player.doubleShip1.AddShip(ref battleField);
-                }
-
-                if (count >= 4)
-                {
-                    if (count == 4)
-                    {
-                        player.singleShip4.DeleteShip(ref battleField);
-                        player.singleShip4.setUpShip(orientationShip, x, y);
-                    }
-
-                    player.singleShip4.AddShip(ref battleField);
-                }
-
-                if (count >= 3)
-                {
-                    if (count == 3)
-                    {
-                        player.singleShip3.DeleteShip(ref battleField);
-                        player.singleShip3.setUpShip(orientationShip, x, y);
-                    }
-
-                    player.singleShip3.AddShip(ref battleField);
-                }
-
-                if (count >= 2)
-                {
-                    if (count == 2)
-                    {
-                        player.singleShip2.DeleteShip(ref battleField);
-                        player.singleShip2.setUpShip(orientationShip, x, y);
-                    }
-
-                    player.singleShip2.AddShip(ref battleField);
-                }
-
-                if (count >= 1)
-                {
-                    if (count == 1)
-                    {
-                        player.singleShip1.DeleteShip(ref battleField);
-                        player.singleShip1.setUpShip(orientationShip, x, y);
-                    }
-
-                    player.singleShip1.AddShip(ref battleField);
-                }
+               
             }
-        }
     }
     public void setShipsRdm()
     {
@@ -318,77 +151,21 @@ public class PlayerGen : Generate
                         {
                             IsOverFlow = false;
                         }
+                        
                     }
                 }
-
-
             } while (IsFreePlace(orientationShip, typeShip, x, y) == false);
 
-
-
-            switch (count)
-            {
-                case 1:
-                    player.singleShip1.setUpShip(orientationShip, x, y);
-                    player.singleShip1.AddShip(ref battleField);
-                    typeShip = TypeShip.Single;
-                    break;
-                case 2:
-                    player.singleShip2.setUpShip(orientationShip, x, y);
-                    player.singleShip2.AddShip(ref battleField);
-                    typeShip = TypeShip.Single;
-                    break;
-                case 3:
-                    player.singleShip3.setUpShip(orientationShip, x, y);
-                    player.singleShip3.AddShip(ref battleField);
-                    typeShip = TypeShip.Single;
-                    break;
-                case 4:
-                    player.singleShip4.setUpShip(orientationShip, x, y);
-                    player.singleShip4.AddShip(ref battleField);
-                    typeShip = TypeShip.Double;
-                    break;
-                case 5:
-                    player.doubleShip1.setUpShip(orientationShip, x, y);
-                    player.doubleShip1.AddShip(ref battleField);
-                    typeShip = TypeShip.Double;
-                    break;
-                case 6:
-                    player.doubleShip2.setUpShip(orientationShip, x, y);
-                    player.doubleShip2.AddShip(ref battleField);
-                    typeShip = TypeShip.Double;
-                    break;
-                case 7:
-                    player.doubleShip3.setUpShip(orientationShip, x, y);
-                    player.doubleShip3.AddShip(ref battleField);
-                    typeShip = TypeShip.Triple;
-                    break;
-                case 8:
-                    player.tripleShip1.setUpShip(orientationShip, x, y);
-                    player.tripleShip1.AddShip(ref battleField);
-                    typeShip = TypeShip.Triple;
-                    break;
-                case 9:
-                    player.tripleShip2.setUpShip(orientationShip, x, y);
-                    player.tripleShip2.AddShip(ref battleField);
-                    typeShip = TypeShip.Quadro;
-                    break;
-                case 10:
-                    player.quadroShip.setUpShip(orientationShip, x, y);
-                    player.quadroShip.AddShip(ref battleField);
-                    break;
-            }
-
             Console.Clear();
-            _draw.Game_Name();
-            _draw.Battlefield(battleField);
+            output.Game_Name();
+            output.Battlefield(battleField);
             Thread.Sleep(400);
 
         }
     }
 }
 
-public class BotGen : Generate
+public class BotLayOut : LayOut
 {
     public Fleet bot = new Fleet();
 
