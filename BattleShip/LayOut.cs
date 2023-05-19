@@ -61,8 +61,9 @@ public class PlayerLayOut : LayOut
     public void setShips()
     {
         var count = 0;
-        int x, y;
-        OrientationShip orientationShip;
+        int x = 0;
+        int y = 0;
+        OrientationShip orientationShip = OrientationShip.Horizontal;
         TypeShip typeShip = TypeShip.Single;
         
         ConsoleKeyInfo pressedKey;

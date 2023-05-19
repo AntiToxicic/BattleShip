@@ -1,6 +1,14 @@
 ﻿using BattleShip;
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
+
+Client player = new Client();
+Client bot = new Client();
+
+
+
+
+
 OutPut OutPut = new OutPut();
 TheBattle theBattle = new TheBattle();
 

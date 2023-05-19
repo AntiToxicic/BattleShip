@@ -3,94 +3,104 @@ namespace BattleShip;
 public class Ship
 {
     private TypeShip _typeShip;
-    private OrientationShip _orientationShip;
+    private OrientationShip _orientation;
     private int _lifeShip;
-    private int _xСoordinate;
-    private int _yCoordinate;
+    private int _x;
+    private int _y;
 
-    public Ship(TypeShip typeShip, OrientationShip orientationShip)
+    public Ship(TypeShip typeShip, OrientationShip orintation, int x, int y)
     {
-        this._typeShip = typeShip;
-        this._orientationShip = orientationShip;
-        this._lifeShip = (int)typeShip;                                      
-        _yCoordinate = 4;
+        _typeShip = typeShip;
+        _orientation = orintation;
+        _x = x;
+        _y = y;
+
     }
 
-    public void setUpShip(OrientationShip orientationShip, int x, int y)   
-    {
-        this._orientationShip = orientationShip;                            
-        this._xСoordinate = x;
-        this._yCoordinate = y;
+    public int X{
+        get { return _x; }
+    }
+
+     public int Y{
+        get { return _y; }
+    }
+
+    public TypeShip typeShip{
+        get { return _typeShip; }
+    }
+
+     public OrientationShip orientation{
+        get { return _orientation; }
     }
 
     public void AddShip(ref char[,] battlefield)                       
     {
-        if (_orientationShip == OrientationShip.Horizontal)
+        if (_orientation == OrientationShip.Horizontal)
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                battlefield[_xСoordinate, _yCoordinate + i] = 'Z';
+                battlefield[_x, _y + i] = 'Z';
             }
         }
         else
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                battlefield[_xСoordinate + i, _yCoordinate] = 'Z';
+                battlefield[_x + i, _y] = 'Z';
             }
         }
     }
 
     public void DeleteShip(ref char[,] battlefield)                     
     {
-        if (_orientationShip == OrientationShip.Horizontal)
+        if (_orientation == OrientationShip.Horizontal)
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                battlefield[_xСoordinate, _yCoordinate + i] = '∙';
+                battlefield[_x, _y + i] = '∙';
             }
         }
         else
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                battlefield[_xСoordinate + i, _yCoordinate] = '∙';
+                battlefield[_x + i, _y] = '∙';
             }
         }
     }
 
     private void ExpShip(ref char[,] battlefield)                  
     {
-        if (_orientationShip == OrientationShip.Horizontal)
+        if (_orientation == OrientationShip.Horizontal)
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                battlefield[_xСoordinate, _yCoordinate + i] = '#';
+                battlefield[_x, _y + i] = '#';
 
-                if (_yCoordinate > 0 && i == 0) battlefield[_xСoordinate, _yCoordinate + i - 1] = '?';
-                if (_yCoordinate + i < 9) battlefield[_xСoordinate, _yCoordinate + i + 1] = '?';
-                if (_xСoordinate > 0) battlefield[_xСoordinate - 1, _yCoordinate + i] = '?';
-                if (_xСoordinate < 9) battlefield[_xСoordinate + 1, _yCoordinate + i] = '?';
-                if (_xСoordinate > 0 && _yCoordinate > 0) battlefield[_xСoordinate - 1, _yCoordinate + i - 1] = '?';
-                if (_xСoordinate < 9 && _yCoordinate + i < 9) battlefield[_xСoordinate + 1, _yCoordinate + i + 1] = '?';
-                if (_xСoordinate < 9 && _yCoordinate > 0) battlefield[_xСoordinate + 1, _yCoordinate + i - 1] = '?';
-                if (_xСoordinate > 0 && _yCoordinate + i < 9) battlefield[_xСoordinate - 1, _yCoordinate + i + 1] = '?';
+                if (_y > 0 && i == 0) battlefield[_x, _y + i - 1] = '?';
+                if (_y + i < 9) battlefield[_x, _y + i + 1] = '?';
+                if (_x > 0) battlefield[_x - 1, _y + i] = '?';
+                if (_x < 9) battlefield[_x + 1, _y + i] = '?';
+                if (_x > 0 && _y > 0) battlefield[_x - 1, _y + i - 1] = '?';
+                if (_x < 9 && _y + i < 9) battlefield[_x + 1, _y + i + 1] = '?';
+                if (_x < 9 && _y > 0) battlefield[_x + 1, _y + i - 1] = '?';
+                if (_x > 0 && _y + i < 9) battlefield[_x - 1, _y + i + 1] = '?';
             }
         }
         else
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                battlefield[_xСoordinate + i, _yCoordinate] = '#';
+                battlefield[_x + i, _y] = '#';
 
-                if (_yCoordinate > 0) battlefield[_xСoordinate + i, _yCoordinate - 1] = '?';
-                if (_yCoordinate < 9) battlefield[_xСoordinate + i, _yCoordinate + 1] = '?';
-                if (_xСoordinate > 0 && i == 0) battlefield[_xСoordinate + i - 1, _yCoordinate] = '?';
-                if (_xСoordinate + i < 9) battlefield[_xСoordinate + i + 1, _yCoordinate] = '?';
-                if (_xСoordinate > 0 && _yCoordinate > 0) battlefield[_xСoordinate + i - 1, _yCoordinate - 1] = '?';
-                if (_xСoordinate + i < 9 && _yCoordinate < 9) battlefield[_xСoordinate + i + 1, _yCoordinate + 1] = '?';
-                if (_xСoordinate + i < 9 && _yCoordinate > 0) battlefield[_xСoordinate + i + 1, _yCoordinate - 1] = '?';
-                if (_xСoordinate > 0 && _yCoordinate < 9) battlefield[_xСoordinate + i - 1, _yCoordinate + 1] = '?';
+                if (_y > 0) battlefield[_x + i, _y - 1] = '?';
+                if (_y < 9) battlefield[_x + i, _y + 1] = '?';
+                if (_x > 0 && i == 0) battlefield[_x + i - 1, _y] = '?';
+                if (_x + i < 9) battlefield[_x + i + 1, _y] = '?';
+                if (_x > 0 && _y > 0) battlefield[_x + i - 1, _y - 1] = '?';
+                if (_x + i < 9 && _y < 9) battlefield[_x + i + 1, _y + 1] = '?';
+                if (_x + i < 9 && _y > 0) battlefield[_x + i + 1, _y - 1] = '?';
+                if (_x > 0 && _y < 9) battlefield[_x + i - 1, _y + 1] = '?';
             }
         }
     }
@@ -102,11 +112,11 @@ public class Ship
 
     public void CheckFieldShip(ref char[,] battlefield, int x, int y) 
     {
-        if (_orientationShip == OrientationShip.Horizontal)
+        if (_orientation == OrientationShip.Horizontal)
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                if (_xСoordinate == x && _yCoordinate + i == y)
+                if (_x == x && _y + i == y)
                 {
                     HitShip(ref battlefield, x, y);
                 }
@@ -116,7 +126,7 @@ public class Ship
         {
             for (int i = 0; i < (int)_typeShip; i++)
             {
-                if (_xСoordinate + i == x && _yCoordinate == y)
+                if (_x + i == x && _y == y)
                 {
                     HitShip(ref battlefield, x, y);
                 }
