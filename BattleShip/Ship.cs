@@ -18,38 +18,33 @@ public class Ship
     }
 
     public int X{
-        get { return _x; }
+        get
+        {
+            return _x;
+        }
     }
 
      public int Y{
-        get { return _y; }
+        get
+        {
+            return _y;
+        }
     }
 
     public TypeShip typeShip{
-        get { return _typeShip; }
+        get
+        {
+            return _typeShip;
+        }
     }
 
      public OrientationShip orientation{
-        get { return _orientation; }
+        get 
+        {
+            return _orientation;
+        }
     }
 
-    public void AddShip(ref char[,] battlefield)                       
-    {
-        if (_orientation == OrientationShip.Horizontal)
-        {
-            for (int i = 0; i < (int)_typeShip; i++)
-            {
-                battlefield[_x, _y + i] = 'Z';
-            }
-        }
-        else
-        {
-            for (int i = 0; i < (int)_typeShip; i++)
-            {
-                battlefield[_x + i, _y] = 'Z';
-            }
-        }
-    }
 
     public void DeleteShip(ref char[,] battlefield)                     
     {
