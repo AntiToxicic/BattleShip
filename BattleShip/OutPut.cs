@@ -2,7 +2,7 @@ namespace BattleShip;
 
 public class OutPut
 {
-    public void Game_Name()                             //Отрисовка названия игры "SEA BATTLE"
+    public void Game_Name()
     {
         Console.WriteLine(" ####    ###     #      #    #      #####   ####  #   #  #  ####   ");
         Console.WriteLine(" #   #  #   #    #      #    #      #      #      #   #  #  #   #  ");
@@ -12,7 +12,7 @@ public class OutPut
         Console.WriteLine("\n");
     }
 
-    public void Game_Menu(params string[] item_bar)     //Отрисвка пунктов меню   (для удобного взаимодействия)
+    public void Game_Menu(params string[] item_bar)
     {
         for (int i = 0; i < item_bar.Length; i++)
         {
@@ -22,7 +22,7 @@ public class OutPut
         Console.Write("\n\n");
     }
 
-    public void Battlefield(char[,] playerField, char[,] botField)     //Отрисовка полей с кораблями
+    public void Battlefield(char[,] playerField, char[,] botField)
     {
         for (int i = 0; i < 10; i++)
         {
@@ -54,7 +54,7 @@ public class OutPut
 
         Console.Write("\n");
     }
-    public void Battlefield(char[,] playerField)     //Отрисовка полей с кораблями
+    public void Battlefield(char[,] playerField)
     {
         for (int i = 0; i < 10; i++)
         {

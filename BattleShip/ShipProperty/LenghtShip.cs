@@ -1,6 +1,6 @@
 namespace BattleShip;
 
-public enum TypeShip
+public enum LenghtShip
 {
     Single = 1,
     Double = 2,

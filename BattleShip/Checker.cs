@@ -5,36 +5,37 @@ class Checker
 
     private char _shipPlace = 'Z';
 
-    public bool IsFreePlace(OrientationShip orientationShip, TypeShip typeShip, int x, int y, char[,] battleField)
+    public bool IsFreePlace(LenghtShip lenghtShip ,TypeShip typeShip, int x, int y, List<Ship> ship)
     {
-        for(int i = 0; (int)typeShip < i; i++)
+        int ShipX, ShipY;
+        Console.WriteLine(ship.Count);
+        for (int i = 0; i < ship.Count; i++)
         {
-        
-            if (battleField[x, y] == _shipPlace) return false;
-            if (x < 9) { if (battleField[x + 1, y] == _shipPlace) return false; }
-            if (x > 0) { if (battleField[x - 1, y] == _shipPlace) return false; }
-            if (y < 9) { if (battleField[x, y + 1] == _shipPlace) return false; }
-            if (y > 0) { if (battleField[x, y - 1] == _shipPlace) return false; }
+            ShipX = ship[i].X;
+            ShipY = ship[i].Y;
 
-            if (x < 9 && y < 9) { if (battleField[x + 1, y + 1] == _shipPlace) return false; }
-            if (x > 0 && y > 0) { if (battleField[x - 1, y - 1] == _shipPlace) return false; }
-            if (x < 9 && y > 0) { if (battleField[x + 1, y - 1] == _shipPlace) return false; }
-            if (x > 0 && y < 9) { if (battleField[x - 1, y + 1] == _shipPlace) return false; }
+            ShipX--;
+            ShipY--;
 
-            if (orientationShip == OrientationShip.Horizontal)
+            for(int row = 0; row < 3; row++)
             {
-                y++;
+                if(typeShip == TypeShip.Horizontal)
+                {
+                    for(int j = ShipX; j < ShipX + (int)lenghtShip + 1; j++)
+                    {
+                        if(j == x && ShipY + row == y) return false;
+                    }
+                }
+                else
+                {
+                    for(int j = ShipY; j < ShipY + (int)lenghtShip + 1; j++)
+                    {
+                        if(j == y && ShipX + row == y) return false;
+                    }
+                }
             }
-            else
-            {
-                x++;
-            }
+        }
 
-        } 
-
-        return true;
+          return true;
     }
-
-
-
 }

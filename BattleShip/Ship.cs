@@ -2,16 +2,16 @@ namespace BattleShip;
 
 public class Ship
 {
+    private LenghtShip _lenghtShip;
     private TypeShip _typeShip;
-    private OrientationShip _orientation;
     private int _lifeShip;
     private int _x;
     private int _y;
 
-    public Ship(TypeShip typeShip, OrientationShip orintation, int x, int y)
+    public Ship(LenghtShip lenghtShip, TypeShip typeShip, int x, int y)
     {
+        _lenghtShip = lenghtShip;
         _typeShip = typeShip;
-        _orientation = orintation;
         _x = x;
         _y = y;
 
@@ -31,33 +31,33 @@ public class Ship
         }
     }
 
-    public TypeShip typeShip{
+    public LenghtShip typeShip{
         get
         {
-            return _typeShip;
+            return _lenghtShip;
         }
     }
 
-     public OrientationShip orientation{
+     public TypeShip orientation{
         get 
         {
-            return _orientation;
+            return _typeShip;
         }
     }
 
 
     public void DeleteShip(ref char[,] battlefield)                     
     {
-        if (_orientation == OrientationShip.Horizontal)
+        if (_typeShip == TypeShip.Horizontal)
         {
-            for (int i = 0; i < (int)_typeShip; i++)
+            for (int i = 0; i < (int)_lenghtShip; i++)
             {
                 battlefield[_x, _y + i] = '∙';
             }
         }
         else
         {
-            for (int i = 0; i < (int)_typeShip; i++)
+            for (int i = 0; i < (int)_lenghtShip; i++)
             {
                 battlefield[_x + i, _y] = '∙';
             }
@@ -66,9 +66,9 @@ public class Ship
 
     private void ExpShip(ref char[,] battlefield)                  
     {
-        if (_orientation == OrientationShip.Horizontal)
+        if (_typeShip == TypeShip.Horizontal)
         {
-            for (int i = 0; i < (int)_typeShip; i++)
+            for (int i = 0; i < (int)_lenghtShip; i++)
             {
                 battlefield[_x, _y + i] = '#';
 
@@ -84,7 +84,7 @@ public class Ship
         }
         else
         {
-            for (int i = 0; i < (int)_typeShip; i++)
+            for (int i = 0; i < (int)_lenghtShip; i++)
             {
                 battlefield[_x + i, _y] = '#';
 
@@ -107,9 +107,9 @@ public class Ship
 
     public void CheckFieldShip(ref char[,] battlefield, int x, int y) 
     {
-        if (_orientation == OrientationShip.Horizontal)
+        if (_typeShip == TypeShip.Horizontal)
         {
-            for (int i = 0; i < (int)_typeShip; i++)
+            for (int i = 0; i < (int)_lenghtShip; i++)
             {
                 if (_x == x && _y + i == y)
                 {
@@ -119,7 +119,7 @@ public class Ship
         }
         else
         {
-            for (int i = 0; i < (int)_typeShip; i++)
+            for (int i = 0; i < (int)_lenghtShip; i++)
             {
                 if (_x + i == x && _y == y)
                 {

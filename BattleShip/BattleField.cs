@@ -1,6 +1,6 @@
 namespace BattleShip;
 
-class BattleField{
+public class BattleField{
 
     public char[,] battleField = new char[10, 10];
     private char _shipPlace = 'Z';

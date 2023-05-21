@@ -5,24 +5,42 @@ public class Constructor
     OutPut outPut = new();
     Checker checker = new();
 
+    public LenghtShip[] shipCollection = new LenghtShip[]
+    {
+        LenghtShip.Single,
+        LenghtShip.Single,
+        LenghtShip.Single,
+        LenghtShip.Single,
+        
+        LenghtShip.Double,
+        LenghtShip.Double,
+        LenghtShip.Double,
+
+        LenghtShip.Triple,
+        LenghtShip.Triple,
+
+        LenghtShip.Quadro
+    };
+
+    // temp battleField be like
+    private char[,] _layOut = new char[10, 10]; 
+
+    private LenghtShip _lenghtShip;
     private TypeShip _typeShip;
-    private OrientationShip _orientation;
     private int _x;
     private int _y;
     
-    public void DefineShip(TypeShip typeShip ,OrientationShip orientation, int x, int y,List<Ship> ShipsList)
+    public void DefineShip(LenghtShip lenghtShip ,TypeShip typeShip, int x, int y,List<Ship> ShipsList)
     {
         _x = x;
         _y = y;
-        _orientation = orientation;
         _typeShip = typeShip;
-
-        AddShip(ShipsList);
+        _lenghtShip = lenghtShip;
     }
 
-    private void AddShip(List<Ship> ShipsList)
+    public void AddShip(List<Ship> ShipsList)
     {
-        ShipsList.Add(new Ship(_typeShip, _orientation, _x, _y));
+        ShipsList.Add(new Ship(_lenghtShip, _typeShip, _x, _y));
     }
 
 
@@ -30,16 +48,16 @@ public class Constructor
     {
         char shipPlace = 'Z';
 
-        if (_orientation == OrientationShip.Horizontal)
+        if (_typeShip == TypeShip.Horizontal)
         {
-            for (int i = 0; i < (int)_typeShip; i++)
+            for (int i = 0; i < (int)_lenghtShip; i++)
             {
                 battlefield[x, y + i] = shipPlace;
             }
         }
         else
         {
-            for (int i = 0; i < (int)_typeShip; i++)
+            for (int i = 0; i < (int)_lenghtShip; i++)
             {
                 battlefield[x + i, y] = shipPlace;
             }
@@ -51,8 +69,8 @@ public class Constructor
 
         int x = 5;
         int y = 5;
-        OrientationShip orientationShip = OrientationShip.Horizontal;
-        TypeShip typeShip = TypeShip.Single;
+        TypeShip typeShipShip = TypeShip.Horizontal;
+        LenghtShip lenghtShip = LenghtShip.Single;
         
         ConsoleKeyInfo pressedKey;
         
@@ -72,8 +90,8 @@ public class Constructor
                     break;
 
                 case ConsoleKey.DownArrow:
-                    if ((x < 9 && orientationShip == OrientationShip.Horizontal) ||
-                        (x < 10 - (int)typeShip && orientationShip == OrientationShip.Vertical)) x++;
+                    if ((x < 9 && typeShipShip == TypeShip.Horizontal) ||
+                        (x < 10 - (int)lenghtShip && typeShipShip == TypeShip.Vertical)) x++;
                     break;
 
                 case ConsoleKey.LeftArrow:
@@ -81,29 +99,59 @@ public class Constructor
                     break;
 
                 case ConsoleKey.RightArrow:
-                    if ((y < 9 && orientationShip == OrientationShip.Vertical) ||
-                        (y < 10 - (int)typeShip && orientationShip == OrientationShip.Horizontal)) y++;
+                    if ((y < 9 && typeShipShip == TypeShip.Vertical) ||
+                        (y < 10 - (int)lenghtShip && typeShipShip == TypeShip.Horizontal)) y++;
                     break;
 
                 case ConsoleKey.Spacebar:
-                    if ((x <= (10 - (int)typeShip)) && y <= (10 - (int)typeShip))
+                    if ((x <= (10 - (int)lenghtShip)) && y <= (10 - (int)lenghtShip))
                     {
-                        if (orientationShip == OrientationShip.Horizontal)
+                        if (typeShipShip == TypeShip.Horizontal)
                         {
-                            orientationShip = OrientationShip.Vertical;
+                            typeShipShip = TypeShip.Vertical;
                         }
                         else
                         {
-                            orientationShip = OrientationShip.Horizontal;
+                            typeShipShip = TypeShip.Horizontal;
                         }
                     }
                     break;
 
                 case ConsoleKey.Enter:
-                    IsShipSet = checker.IsFreePlace(orientationShip, typeShip, x, y, battleField);
+                   // IsShipSet = checker.IsFreePlace(lenghtShip, typeShipShip, x, y, battleField);
                     break;
             }
-           
         }
+
     }
+
+    public void RandomPlace(LenghtShip lenghtShip,  out TypeShip typeShip, out int x, out int y, char[,] battleField, List<Ship> listShip)
+    {
+        Random random = new();
+
+    do
+    {
+        bool IsOverFlow = true;
+
+        do
+        {
+            typeShip = (TypeShip)random.Next(2);
+            x = random.Next(10);
+            y = random.Next(10);
+
+            if (typeShip == TypeShip.Horizontal)
+            {
+                if (y - 1 + (int)lenghtShip < battleField.GetLength(0)) IsOverFlow = false; 
+            }
+            else
+            {
+                if (x - 1 + (int)lenghtShip < battleField.GetLength(0)) IsOverFlow = false;
+            }
+            
+        } while (IsOverFlow);
+    }
+    while (checker.IsFreePlace(lenghtShip, typeShip, x, y, listShip) == false);
+
+    }
+
 }

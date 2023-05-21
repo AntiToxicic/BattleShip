@@ -1,6 +1,6 @@
 namespace BattleShip;
 
-public enum OrientationShip
+public enum TypeShip
 {
     Horizontal,
     Vertical
