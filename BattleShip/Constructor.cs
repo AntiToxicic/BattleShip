@@ -7,19 +7,19 @@ public class Constructor
 
     public LenghtShip[] shipCollection = new LenghtShip[]
     {
-        LenghtShip.Single,
-        LenghtShip.Single,
-        LenghtShip.Single,
-        LenghtShip.Single,
-        
-        LenghtShip.Double,
-        LenghtShip.Double,
-        LenghtShip.Double,
+        LenghtShip.Quadro,
 
         LenghtShip.Triple,
         LenghtShip.Triple,
 
-        LenghtShip.Quadro
+        LenghtShip.Double,
+        LenghtShip.Double,
+        LenghtShip.Double,
+
+        LenghtShip.Single,
+        LenghtShip.Single,
+        LenghtShip.Single,
+        LenghtShip.Single
     };
 
     // temp battleField be like
@@ -63,7 +63,7 @@ public class Constructor
             }
         }
     }
-    public void findPlace(char[,] battleField)
+    public void findPlace(List<Ship> ship)
     {
         bool IsShipSet = false;
 
@@ -118,7 +118,7 @@ public class Constructor
                     break;
 
                 case ConsoleKey.Enter:
-                   // IsShipSet = checker.IsFreePlace(lenghtShip, typeShipShip, x, y, battleField);
+                    IsShipSet = checker.IsFreePlace(lenghtShip, typeShipShip, x, y, checker.IsFreePlace(ship));
                     break;
             }
         }

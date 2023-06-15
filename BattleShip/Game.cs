@@ -21,7 +21,7 @@ public Client bot = new();
         int x,y;
         TypeShip typeShip;
 
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < _constructor.shipCollection.Length; i++)
         {
             _constructor.RandomPlace(_constructor.shipCollection[i], out typeShip, out x, out y, battleField, ShipsList);
             _constructor.DefineShip(_constructor.shipCollection[i], typeShip, x,y,ShipsList);

@@ -31,14 +31,14 @@ public class Ship
         }
     }
 
-    public LenghtShip typeShip{
+    public LenghtShip lenghtShip{
         get
         {
             return _lenghtShip;
         }
     }
 
-     public TypeShip orientation{
+     public TypeShip typeShip{
         get 
         {
             return _typeShip;
