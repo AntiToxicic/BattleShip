@@ -17,28 +17,32 @@ public class Ship
 
     }
 
-    public int X{
+    public int X
+    {
         get
         {
             return _x;
         }
     }
 
-     public int Y{
+     public int Y
+     {
         get
         {
             return _y;
         }
     }
 
-    public LenghtShip lenghtShip{
+    public LenghtShip lenghtShip
+    {
         get
         {
             return _lenghtShip;
         }
     }
 
-     public TypeShip typeShip{
+     public TypeShip typeShip
+     {
         get 
         {
             return _typeShip;

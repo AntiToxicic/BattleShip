@@ -18,15 +18,15 @@ public Client bot = new();
 
     private void CreateFleet(List<Ship> ShipsList, char[,] battleField, bool IsRandom)
     {
-        int x,y;
-        TypeShip typeShip;
-
         for(int i = 0; i < _constructor.shipCollection.Length; i++)
         {
-            _constructor.RandomPlace(_constructor.shipCollection[i], out typeShip, out x, out y, battleField, ShipsList);
-            _constructor.DefineShip(_constructor.shipCollection[i], typeShip, x,y,ShipsList);
+            if (IsRandom)
+                 _constructor.RandomPlace(_constructor.shipCollection[i], ShipsList);
+            else
+                 _constructor.findPlace(_constructor.shipCollection[i], ShipsList);
+            
             _constructor.AddShip(ShipsList);
-            _constructor.SetShip(ref battleField, ShipsList[i].X, ShipsList[i].Y);
+            _constructor.SetShip(ref battleField, ShipsList[i].X, ShipsList[i].Y, ShipsList[i].typeShip, ShipsList[i].lenghtShip);
         }
     }
 }

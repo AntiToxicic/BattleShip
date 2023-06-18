@@ -1,19 +1,26 @@
 namespace BattleShip;
 
 public class BattleField{
-
-    public char[,] battleField = new char[10, 10];
-    private char _shipPlace = 'Z';
-
-
+    
+    private static int _mapSize = 10;
+    public char[,] battleField = new char[_mapSize, _mapSize];
+    
     public BattleField()
     {
-        for (int i = 0; i < battleField.GetLength(0); i++)
+        for (int i = 0; i < _mapSize; i++)
         {
-            for (int j = 0; j < battleField.GetLength(1); j++)
+            for (int j = 0; j < _mapSize; j++)
             {
                 battleField[i, j] = '∙';
             }
+        }
+    }
+
+    public int mapSize
+    {
+        get
+        {
+            return _mapSize;
         }
     }
 

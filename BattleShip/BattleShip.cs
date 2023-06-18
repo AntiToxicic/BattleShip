@@ -7,11 +7,10 @@ class BattleShip
         Game game = new();
         OutPut outPut = new();
 
-        game.start(true);
+        game.start(false);
 
         outPut.Game_Name();
         outPut.Battlefield(game.player.battleField.battleField ,game.bot.battleField.battleField);
-
         
     }
 }
