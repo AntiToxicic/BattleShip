@@ -1,20 +1,18 @@
 namespace BattleShip;
 
-class Game{
+public class PlayersData
+{
 
 private Constructor _constructor = new();
 public Client player = new();
 public Client bot = new();
 
 
-    public void start(bool IsRandom)
+    public void Generate(bool IsRandom)
     {
         CreateFleet(player.fleet.ShipsList, player.battleField.battleField, IsRandom);
         CreateFleet(bot.fleet.ShipsList, bot.battleField.battleField, true);
     }
-
-
-
 
     private void CreateFleet(List<Ship> ShipsList, char[,] battleField, bool IsRandom)
     {

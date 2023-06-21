@@ -2,56 +2,48 @@ namespace BattleShip;
 
 class Checker
 {
-
-    private char _shipPlace = 'Z';
-
-    public bool IsFreePlace(LenghtShip lenghtShip ,TypeShip typeShip, int x, int y, List<Ship> ship)
+    public bool IsFreePlace(LenghtShip lenghtShip ,TypeShip typeShip, int x, int y, List<Ship> ShipList)
     {
-        int shipX, shipY;
-        int checkX, checkY;
+        int shipList_X;
+        int shipList_Y;
 
-        for (int serialShip = 0; serialShip < ship.Count; serialShip++)
+        int shipCheck_X = x - 1;
+        int shipCheck_Y = y - 1;
+
+        for (int shipList_Count = 0; shipList_Count < ShipList.Count; shipList_Count++)
         {
-            for (int lenShipList = 0; lenShipList < (int)ship[serialShip].lenghtShip; lenShipList ++)
+            shipList_X = ShipList[shipList_Count].X;
+            shipList_Y = ShipList[shipList_Count].Y;
+
+            for (int shipList_Lenght = 0; shipList_Lenght < (int)ShipList[shipList_Count].lenghtShip; shipList_Lenght ++)
             {
-                for (int lenShipCheck = 0; lenShipCheck < (int)lenghtShip + 2; lenShipCheck++)
+                for (int shipCheck_Lenght = 0; shipCheck_Lenght < (int)lenghtShip + 2; shipCheck_Lenght++)
                 {
-                    
-                    shipX = ship[serialShip].X;
-                    shipY = ship[serialShip].Y;
-                    checkX = x - 1;
-                    checkY = y - 1;
-
-                    if (ship[serialShip].typeShip == TypeShip.Horizontal)
-                        shipY += lenShipList;
-                    else
-                        shipX += lenShipList;
-
                     for (int lenRow = 0; lenRow < 3; lenRow++)
                     {
                         if(typeShip == TypeShip.Horizontal)
                         {
-                            if(ship[serialShip].typeShip == TypeShip.Horizontal)
+                            if(ShipList[shipList_Count].typeShip == TypeShip.Horizontal)
                             {
-                                if (shipX == checkX + lenRow && shipY + lenShipList == checkY + lenShipCheck)
+                                if (shipList_X == shipCheck_X + lenRow && shipList_Y + shipList_Lenght == shipCheck_Y + shipCheck_Lenght)
                                     return false;
                             }
                             else
                             {
-                                if (shipX + lenShipList == checkX + lenRow && shipY == checkY + lenShipCheck)
-                                    return false;   
+                                if (shipList_X + shipList_Lenght == shipCheck_X + lenRow && shipList_Y == shipCheck_Y + shipCheck_Lenght)
+                                    return false;
                             }
                         }
                         else
                         {
-                            if(ship[serialShip].typeShip == TypeShip.Horizontal)
+                            if(ShipList[shipList_Count].typeShip == TypeShip.Horizontal)
                             {
-                                if (shipX == checkX + lenShipCheck && shipY + lenShipList == checkY + lenRow)
+                                if (shipList_X == shipCheck_X + shipCheck_Lenght && shipList_Y + shipList_Lenght == shipCheck_Y + lenRow)
                                     return false;
                             }
                             else
                             {
-                                if (shipX + lenShipList == checkX + lenShipCheck && shipY == checkY + lenRow)
+                                if (shipList_X + shipList_Lenght == shipCheck_X + shipCheck_Lenght && shipList_Y == shipCheck_Y + lenRow)
                                     return false;
                             }
                         }   

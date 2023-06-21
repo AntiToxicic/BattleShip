@@ -37,7 +37,7 @@ public class OutPut
 
             for (int j = 0; j < 10; j++)
             {
-                if (botField[i, j] == '+')
+                if (botField[i, j] == (char)Markers.Aim)
                 {
                     Console.Write("  ");
                     Console.ForegroundColor = ConsoleColor.Black;

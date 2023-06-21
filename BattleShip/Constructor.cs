@@ -23,7 +23,6 @@ public class Constructor
         LenghtShip.Single
     };
     
-    private char[,] _layOut = new char[10, 10]; 
 
     private LenghtShip _lenghtShip;
     private TypeShip _typeShip;
@@ -35,7 +34,6 @@ public class Constructor
         ShipsList.Add(new Ship(_lenghtShip, _typeShip, _x, _y));
     }
 
-
     public void SetShip(ref char[,] battlefield, int x, int y, TypeShip typeShip, LenghtShip lenghtShip)                       
     {
         char shipPlace = 'Z';
@@ -43,15 +41,12 @@ public class Constructor
         for (int i = 0; i < (int)lenghtShip; i++)
         {
             if (typeShip == TypeShip.Horizontal)
-            {
                 battlefield[x, y + i] = shipPlace;
-            }
             else
-            {
                 battlefield[x + i, y] = shipPlace;
-            }
         }
     }
+
     public void findPlace(LenghtShip lenghtShip, List<Ship> ShipsList)
     {
         bool IsShipSet = false;
@@ -72,8 +67,6 @@ public class Constructor
             _outPut.Game_Name();
             _outPut.Battlefield(_battleField.battleField);
             _outPut.rules();
-
-            
             
             pressedKey = Console.ReadKey();  
 
@@ -120,7 +113,6 @@ public class Constructor
                 SetShip(ref _battleField.battleField, ShipsList[i].X, ShipsList[i].Y, ShipsList[i].typeShip, ShipsList[i].lenghtShip);
 
             SetShip(ref _battleField.battleField, _x, _y, _typeShip, _lenghtShip);
-
         }
     }
 
@@ -151,7 +143,5 @@ public class Constructor
             while (IsOverFlow);
         }
         while (_checker.IsFreePlace(lenghtShip, _typeShip, _x, _y, listShip) == false);
-
     }
-
 }

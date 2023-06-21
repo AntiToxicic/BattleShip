@@ -4,13 +4,14 @@ class BattleShip
 {
     static void Main(string[] args)
     {
-        Game game = new();
+        TheBattle theBattle = new();
         OutPut outPut = new();
 
-        game.start(false);
-
+        theBattle.playersData.Generate(true);
+        
         outPut.Game_Name();
-        outPut.Battlefield(game.player.battleField.battleField ,game.bot.battleField.battleField);
+        outPut.Battlefield(theBattle.playersData.player.battleField.battleField,
+            theBattle.playersData.bot.battleField.battleField);
         
     }
 }
