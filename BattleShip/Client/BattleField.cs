@@ -11,7 +11,7 @@ public class BattleField{
         {
             for (int j = 0; j < _mapSize; j++)
             {
-                battleField[i, j] = (char)Markers.CellShip;
+                battleField[i, j] = (char)Markers.Empty;
             }
         }
     }

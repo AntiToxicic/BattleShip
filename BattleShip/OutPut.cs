@@ -2,7 +2,8 @@ namespace BattleShip;
 
 public class OutPut
 {
-    public void Game_Name()
+    private BattleField _battleField = new();
+    public void DrawGameName()
     {
         Console.WriteLine(" ####    ###     #      #    #      #####   ####  #   #  #  ####   ");
         Console.WriteLine(" #   #  #   #    #      #    #      #      #      #   #  #  #   #  ");
@@ -12,30 +13,20 @@ public class OutPut
         Console.WriteLine("\n");
     }
 
-    public void Game_Menu(params string[] item_bar)
+    public void DrawBattleFields(char[,] playerField, char[,] botField)
     {
-        for (int i = 0; i < item_bar.Length; i++)
-        {
-            Console.Write($"\t{i + 1}. [{item_bar[i]}]");
-        }
-
-        Console.Write("\n\n");
-    }
-
-    public void Battlefield(char[,] playerField, char[,] botField)
-    {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < _battleField.mapSize; i++)
         {
             Console.Write("\n");
 
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < _battleField.mapSize; j++)
             {
                 Console.Write($"  {playerField[i, j]}");
             }
 
             Console.Write("\t\t");
 
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < _battleField.mapSize; j++)
             {
                 if (botField[i, j] == (char)Markers.Aim)
                 {
@@ -54,23 +45,55 @@ public class OutPut
 
         Console.Write("\n");
     }
-    public void Battlefield(char[,] playerField)
+    public void DrawPlayerField(char[,] playerField)
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < _battleField.mapSize; i++)
         {
             Console.Write("\n");
 
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < _battleField.mapSize; j++)
             {
                 Console.Write($"  {playerField[i, j]}");
             }
-
         }
 
         Console.Write("\n");
     }
 
-    public void rules()
+    public void DrawAimAndBattleFields(int x, int y, char[,] playerField, char[,] botField)
+    {
+        for (int i = 0; i < _battleField.mapSize; i++)
+        {
+            Console.Write("\n");
+
+            for (int j = 0; j < _battleField.mapSize; j++)
+            {
+                    Console.Write($"  {playerField[i, j]}");
+            }
+
+            Console.Write("\t\t");
+
+            for (int j = 0; j < _battleField.mapSize; j++)
+            {
+                if (i == x && j == y)
+                {
+                    Console.Write("  ");
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.Write($"{(char)Markers.Aim}");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.Write($"  {botField[i, j]}");
+                }
+            }
+        }
+
+        Console.Write("\n");
+    } 
+
+    public void DrawRules()
     {
         Console.WriteLine("For set ship press \"Enter\"");
         Console.WriteLine("For change orientation press \"Spacebar\"");
@@ -80,7 +103,7 @@ public class OutPut
         Console.WriteLine("       \"→\" - move right");
     }
 
-    public void rules2()
+    public void DrawRules2()
     {
         Console.WriteLine("For move cursor use\t\"←\" \"→\" \"↓\" \"↑\"");
         Console.WriteLine("For fire press \"Enter\"");

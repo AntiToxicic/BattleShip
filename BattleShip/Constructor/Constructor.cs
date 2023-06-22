@@ -23,7 +23,6 @@ public class Constructor
         LenghtShip.Single
     };
     
-
     private LenghtShip _lenghtShip;
     private TypeShip _typeShip;
     private int _x;
@@ -35,22 +34,18 @@ public class Constructor
     }
 
     public void SetShip(ref char[,] battlefield, int x, int y, TypeShip typeShip, LenghtShip lenghtShip)                       
-    {
-        char shipPlace = 'Z';
-        
+    {  
         for (int i = 0; i < (int)lenghtShip; i++)
         {
             if (typeShip == TypeShip.Horizontal)
-                battlefield[x, y + i] = shipPlace;
+                battlefield[x, y + i] = (char)Markers.CellShip;
             else
-                battlefield[x + i, y] = shipPlace;
+                battlefield[x + i, y] = (char)Markers.CellShip;
         }
     }
 
     public void findPlace(LenghtShip lenghtShip, List<Ship> ShipsList)
     {
-        bool IsShipSet = false;
-
         _x = 5;
         _y = 5;
         _typeShip = TypeShip.Horizontal;
@@ -58,15 +53,15 @@ public class Constructor
         
         ConsoleKeyInfo pressedKey;
         
-        while (IsShipSet == false)
+        while (true)
         {
             
             SetShip(ref _battleField.battleField, _x, _y, _typeShip, _lenghtShip);
             
             Console.Clear();
-            _outPut.Game_Name();
-            _outPut.Battlefield(_battleField.battleField);
-            _outPut.rules();
+            _outPut.DrawGameName();
+            _outPut.DrawPlayerField(_battleField.battleField);
+            _outPut.DrawRules();
             
             pressedKey = Console.ReadKey();  
 
@@ -77,8 +72,8 @@ public class Constructor
                     break;
 
                 case ConsoleKey.DownArrow:
-                    if ((_x < 9 && _typeShip == TypeShip.Horizontal) ||
-                        (_x < 10 - (int)lenghtShip && _typeShip == TypeShip.Vertical)) _x++;
+                    if ((_x < _battleField.mapSize - 1 && _typeShip == TypeShip.Horizontal) ||
+                        (_x < _battleField.mapSize - (int)lenghtShip && _typeShip == TypeShip.Vertical)) _x++;
                     break;
 
                 case ConsoleKey.LeftArrow:
@@ -86,12 +81,12 @@ public class Constructor
                     break;
 
                 case ConsoleKey.RightArrow:
-                    if ((_y < 9 && _typeShip == TypeShip.Vertical) ||
-                        (_y < 10 - (int)lenghtShip && _typeShip == TypeShip.Horizontal)) _y++;
+                    if ((_y < _battleField.mapSize - 1 && _typeShip == TypeShip.Vertical) ||
+                        (_y < _battleField.mapSize - (int)lenghtShip && _typeShip == TypeShip.Horizontal)) _y++;
                     break;
 
                 case ConsoleKey.Spacebar:
-                    if ((_x <= (10 - (int)lenghtShip)) && _y <= (10 - (int)lenghtShip))
+                    if ((_x <= (_battleField.mapSize - (int)lenghtShip)) && _y <= (_battleField.mapSize - (int)lenghtShip))
                     {
                         if (_typeShip == TypeShip.Horizontal)
                             _typeShip = TypeShip.Vertical;
@@ -101,13 +96,15 @@ public class Constructor
                     break;
 
                 case ConsoleKey.Enter:
-                    IsShipSet = _checker.IsFreePlace(lenghtShip, _typeShip, _x, _y, ShipsList);
+                    if(_checker.IsFreePlace(lenghtShip, _typeShip, _x, _y, ShipsList))
+                        return;
+
                     break;
             }
             
             for (int i = 0; i < _battleField.mapSize; i++)
                 for (int j = 0; j < _battleField.mapSize; j++)
-                    _battleField.battleField[i, j] = '∙';
+                    _battleField.battleField[i, j] = (char)Markers.Empty;
 
             for (int i = 0; i < ShipsList.Count; i++)
                 SetShip(ref _battleField.battleField, ShipsList[i].X, ShipsList[i].Y, ShipsList[i].typeShip, ShipsList[i].lenghtShip);
@@ -126,8 +123,8 @@ public class Constructor
     
             do
             {
-                _typeShip = (TypeShip)random.Next(2);
                 _lenghtShip = lenghtShip;
+                _typeShip = (TypeShip)random.Next(2);
                 _x = random.Next(_battleField.mapSize);
                 _y = random.Next(_battleField.mapSize);
                 

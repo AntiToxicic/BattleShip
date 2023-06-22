@@ -6,13 +6,36 @@ class BattleShip
     {
         TheBattle theBattle = new();
         OutPut outPut = new();
+        bool answer;
+        
+        while(true)
+        {
+            outPut.DrawGameName();
+            Console.WriteLine($"Do you wanna fill Battlefield random?\tY/N?");
+            
+            char key = Console.ReadKey().KeyChar;
 
-        theBattle.playersData.Generate(true);
+            if(key == 'y')
+            {
+                answer = true;
+                break;
+            }
+
+            if(key == 'n')
+            {
+                answer = false;
+                break;
+            }
+            
+            Console.Clear();
+        }
         
-        outPut.Game_Name();
-        outPut.Battlefield(theBattle.playersData.player.battleField.battleField,
+        theBattle.playersData.Generate(answer);
+        theBattle.TurnTurn();
+        
+        outPut.DrawGameName();
+        outPut.DrawBattleFields(theBattle.playersData.player.battleField.battleField,
             theBattle.playersData.bot.battleField.battleField);
-        
     }
 }
 

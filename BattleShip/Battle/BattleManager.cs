@@ -2,7 +2,7 @@ namespace BattleShip;
 
 public class BattleManager
 {
-
+    private BattleField _battleField = new();
     public void CheckShot(int x, int y, List<Ship> ShipList, ref char[,] battleField) 
     {
         for(int i = 0; i < ShipList.Count; i++)
@@ -15,7 +15,7 @@ public class BattleManager
                     {
                         ShipList[i].Damage();
 
-                        if(ShipList[i].AliveShip)
+                        if(ShipList[i].IsAliveShip())
                             Hit(x,y, ref battleField);
                         else
                             Explode(ShipList[i], ref battleField);
@@ -29,7 +29,7 @@ public class BattleManager
                     {
                         ShipList[i].Damage();
 
-                        if(ShipList[i].AliveShip)
+                        if(ShipList[i].IsAliveShip())
                             Hit(x,y, ref battleField);
                         else
                             Explode(ShipList[i], ref battleField);
@@ -49,7 +49,7 @@ public class BattleManager
     }
 
     private void Miss(int x, int y, ref char[,] battleField)
-    {
+    {   
         battleField[x, y] = (char)Markers.Miss;
     }
 
@@ -58,18 +58,18 @@ public class BattleManager
         int x = ship.X - 1;
         int y = ship.Y - 1;
 
-        for(int i = 0; i < (int)ship.lenghtShip; i ++)
+        for(int i = 0; i < (int)ship.lenghtShip + 2; i ++)
         {
             for(int j = 0; j < 3; j++)
             {
                 if(ship.typeShip == TypeShip.Horizontal)
                 {
-                    if((x > 0 && x < 9) && (y > 0 && y < 9))
-                        battleField[x + j, y + i] = (char)Markers.Explode;
+                    if((x + j >= 0 && x + j < _battleField.mapSize) && (y + i >= 0 && y + i < _battleField.mapSize))
+                        battleField[x + j, y + i] = (char)Markers.Explode; 
                 }  
                 else
                 {
-                    if((x > 0 && x < 9) && (y > 0 && y < 9))
+                    if((x + i >= 0 && x + i < _battleField.mapSize) && (y + j >= 0 && y + j < _battleField.mapSize))
                         battleField[x + i, y + j] = (char)Markers.Explode;
                 }  
             }

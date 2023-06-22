@@ -2,10 +2,10 @@ namespace BattleShip;
 
 enum Markers
 {
-    Empty = '∙',
+    Empty = '˙',
     Hit = 'x',
-    Miss = '?',
+    Miss = '•',
     Explode = '#',
     Aim = '+',
-    CellShip = '∙'
+    CellShip = '∆'
 }

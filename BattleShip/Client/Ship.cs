@@ -19,7 +19,7 @@ public class Ship
 
     public void Damage() => _lifeShip--;
 
-    public bool AliveShip => (_lifeShip > 0);
+    public bool IsAliveShip() => (_lifeShip > 0);
 
     public int X
     {
