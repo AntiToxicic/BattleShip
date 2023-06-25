@@ -66,13 +66,28 @@ public class BattleManager
                 if(ship.typeShip == TypeShip.Horizontal)
                 {
                     if((x + j >= 0 && x + j < _battleField.mapSize) && (y + i >= 0 && y + i < _battleField.mapSize))
-                        battleField[x + j, y + i] = (char)Markers.Explode; 
+                        battleField[x + j, y + i] = (char)Markers.Miss; 
                 }  
                 else
                 {
                     if((x + i >= 0 && x + i < _battleField.mapSize) && (y + j >= 0 && y + j < _battleField.mapSize))
-                        battleField[x + i, y + j] = (char)Markers.Explode;
+                        battleField[x + i, y + j] = (char)Markers.Miss;
                 }  
+            }
+        }
+
+        x = ship.X;
+        y = ship.Y;
+        
+        for (int k = 0; k < (int)ship.lenghtShip; k++)
+        {
+            if (ship.typeShip == TypeShip.Horizontal)
+            {
+                battleField[x, y + k] = (char)Markers.Explode;
+            }
+            else
+            {
+                battleField[x + k, y] = (char)Markers.Explode;
             }
         }
     }
