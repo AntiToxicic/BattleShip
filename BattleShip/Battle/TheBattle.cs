@@ -23,15 +23,16 @@ public class TheBattle
     {
         int x = 4;
         int y = 4;
+        bool hit = true;
         ConsoleKeyInfo pressedKey;
 
         while(true)
         {
             Console.Clear();
-            output.DrawAimAndBattleFields(x, y, playersData.player.battleField.battleField, playersData.bot.battleField.battleField);
+            output.DrawAimAndBattleFields(x, y, playersData.player.battleField.battleField,
+                playersData.bot.battleField.battleField);
             output.DrawRules2();
-
-
+            
             pressedKey = Console.ReadKey();
 
             switch (pressedKey.Key)
@@ -48,15 +49,25 @@ public class TheBattle
                 case ConsoleKey.LeftArrow:
                     if (y > 0) y--; break;
 
-                 case ConsoleKey.Enter:
+                case ConsoleKey.Enter:
 
-                 if(playersData.bot.battleField.battleField[x,y] == (char)Markers.Empty)
-                 {
-                    battleManager.CheckShot(x, y, playersData.bot.fleet.ShipsList, ref playersData.bot.battleField.battleField);
-                    return;
-                 }
+                if (playersData.bot.battleField.battleField[x,y] == (char)Markers.Empty)
+                {
+                    hit = battleManager.CheckShot(x, y, playersData.bot.fleet.ShipsList,
+                        ref playersData.bot.battleField.battleField);
 
-                 break;
+                    if (hit)
+                    {
+                        PlayerTurn();
+                        return;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                
+                break;
             }
         }
     }
@@ -64,6 +75,7 @@ public class TheBattle
     private void BotTurn()
     {
         int x, y;
+        bool hit;
         Random random = new Random();
     
         while (true)
@@ -76,6 +88,17 @@ public class TheBattle
                 break;
         }
 
-        battleManager.CheckShot(x, y, playersData.player.fleet.ShipsList, ref playersData.player.battleField.battleField);
+        hit = battleManager.CheckShot(x, y, playersData.player.fleet.ShipsList,
+            ref playersData.player.battleField.battleField);
+
+        if (hit)
+        {
+            BotTurn();
+            return;
+        }
+        else
+        {
+            return;
+        }
     }
 }

@@ -3,7 +3,7 @@ namespace BattleShip;
 public class BattleManager
 {
     private BattleField _battleField = new();
-    public void CheckShot(int x, int y, List<Ship> ShipList, ref char[,] battleField) 
+    public bool CheckShot(int x, int y, List<Ship> ShipList, ref char[,] battleField) 
     {
         for(int i = 0; i < ShipList.Count; i++)
         {
@@ -20,7 +20,7 @@ public class BattleManager
                         else
                             Explode(ShipList[i], ref battleField);
 
-                        return;
+                        return true;
                     }
                 }  
                 else
@@ -34,13 +34,14 @@ public class BattleManager
                         else
                             Explode(ShipList[i], ref battleField);
                             
-                        return;
+                        return true;
                     } 
                 } 
             }
         }
 
         Miss(x,y, ref battleField);
+        return false;
     }
 
     private void Hit(int x, int y, ref char[,] battleField)     
